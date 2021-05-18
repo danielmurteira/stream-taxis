@@ -1,0 +1,88 @@
+<html> 
+<head> 
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<script src="leaflet-geometryutil.js"></script>
+	<script src="leaflet-arrowheads.js"></script>
+	<meta http-equiv="refresh" content="10">
+</head>
+<body>
+<div id="mapid" style="height: 100%; width: 100%"></div>
+<script document.body.style.zoom="100%" type="text/javascript">
+	document.body.style.zoom = 1.3;
+
+	var coordsMarkers = [];
+	var markers = [];
+	var coordsLines = [];
+	var polylines = [];
+	//var coordsLabels = [];
+	//var labels = [];
+ 
+	function updateLines() {
+    	for (i = 0; i < 10; i++) {
+        	polylines[i].setLatLngs( coordsLines[i] );
+			//labels[i].setLatLng( coordsLabels[i] );
+    	}
+	}
+
+	function updateMarkers() {
+    	for (i = 0; i < 10; i++) {
+        	markers[i].setLatLng( coordsMarkers[i] );
+    	}
+	}
+ 
+	function initMap() {
+		map = L.map('mapid', { zoomControl:false }).setView([41.474937 - 160 * 0.004491556, -74.913585 + 155 * 0.005986], 11);
+		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+			maxZoom: 12,
+			minZoom: 10
+		}).addTo(map);
+		var geoMarkers = L.layerGroup().addTo(map);
+			
+		map.touchZoom.disable();
+		map.doubleClickZoom.disable();
+		map.scrollWheelZoom.disable();
+		map.boxZoom.disable();
+		//map.keyboard.disable();
+		//map.dragging.disable();
+
+		for (i = 0; i < 10; i++) {
+			var iurl;
+				
+			switch(i) {
+				case 0: iurl = 'https://image.flaticon.com/icons/svg/188/188234.svg'; break;
+				case 1: iurl = 'https://image.flaticon.com/icons/svg/188/188235.svg'; break;
+				case 2: iurl = 'https://image.flaticon.com/icons/svg/188/188236.svg'; break;
+				case 3: iurl = 'https://image.flaticon.com/icons/svg/188/188237.svg'; break;
+				case 4: iurl = 'https://image.flaticon.com/icons/svg/188/188238.svg'; break;
+				case 5: iurl = 'https://image.flaticon.com/icons/svg/188/188239.svg'; break;
+				case 6: iurl = 'https://image.flaticon.com/icons/svg/188/188240.svg'; break;
+				case 7: iurl = 'https://image.flaticon.com/icons/svg/188/188241.svg'; break;
+				case 8: iurl = 'https://image.flaticon.com/icons/svg/188/188242.svg'; break;
+				case 9: iurl = 'https://image.flaticon.com/icons/svg/188/188243.svg'; break;
+				default: iurl = 'https://image.flaticon.com/icons/svg/188/188234.svg';
+			}
+			
+			var myIcon = L.icon({ iconUrl: iurl, iconSize: [23, 23], iconAnchor: [10, 25] });
+			//var myIconSmall = L.icon({ iconUrl: iurl, iconSize: [13, 13], iconAnchor: [0, 0] });
+			
+			var m = L.marker([40.558896 - i/10.0, -74.185130 + i/10.0], {icon: myIcon});
+			m.addTo(map);
+			markers.push(m);
+				
+			var p = L.polyline([[40.558896 - i/10.0, -74.185130	+ i/10.0], [40.558896 - i/10.0, -74.185130 + i/10.0]], { color: 'green', weight: 3 }).arrowheads({size: '5px', color: 'darkgreen'});
+			p.addTo(map);
+			polylines.push(p);
+			
+			//var l = L.marker([40.558896 - i/10.0, -74.185130 + i/10.0], {icon: myIconSmall});
+			//l.addTo(map);
+			//labels.push(l);
+		}
+	}
+	
+	initMap();
+
+</script>
+</body>
+</html>
