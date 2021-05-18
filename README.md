@@ -3,7 +3,7 @@
 
 This project is an adaptation from [DEBS 2015 Grand Challenge](http://www.debs2015.org/call-grand-challenge.html), using Kafka to publish the data set, Spark Streaming for processing and Leaflet to show the results.
 
-The goal of the challenge is to analyze a stream of taxi trips based on a stream of trip reports from New York City, with a special focus on discovering frequent routes and high profit regions. A sample output for both scenarios can be viewed in the images below.
+The goal of the challenge is to analyze taxi trips based on a stream of trip reports from New York City, with a special focus on discovering frequent routes and high profit regions. A sample output for both scenarios can be viewed in the images below.
 
 Frequent Routes         |  Profitable Areas
 :-------------------------:|:-------------------------:
